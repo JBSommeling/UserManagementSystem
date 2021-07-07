@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route for homepage (invokable)
+Route::get('/', HomeController::class)->name('home');
+
+// Routes for users
+Route::resource('users', UserController::class);
