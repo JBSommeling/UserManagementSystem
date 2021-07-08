@@ -20,6 +20,12 @@ class ForgotPasswordController extends Controller
      * @return void
      */
     public function resetPassword() {
-        return view('auth.passwords.reset');
+        $translatedFields = json_encode([
+            'title' => trans('forms.reset'),
+            'email' => trans('forms.email'),
+            'submit' => trans('buttons.submit'),
+        ]);
+
+        return view('auth.passwords.reset', compact('translatedFields'));
     }
 }

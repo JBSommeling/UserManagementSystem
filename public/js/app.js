@@ -1870,9 +1870,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     fields: ""
+  },
+  methods: {
+    submit: function submit() {
+      axios.post;
+    }
   }
 });
 
@@ -37430,20 +37442,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Reset Password")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("form", { attrs: { method: "POST" } }, [
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v(_vm._s(_vm.fields["title"]))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                }
+              }
+            },
+            [
               _c("div", { staticClass: "form-group row" }, [
                 _c(
                   "label",
@@ -37451,37 +37469,61 @@ var staticRenderFns = [
                     staticClass: "col-md-4 col-form-label text-md-right",
                     attrs: { for: "email" }
                   },
-                  [_vm._v("E-mail Adress")]
+                  [_vm._v(_vm._s(_vm.fields["email"]))]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control is-invalid",
-                    attrs: {
-                      id: "email",
-                      type: "email",
-                      name: "email",
-                      value: "",
-                      required: "",
-                      autocomplete: "email",
-                      autofocus: ""
-                    }
-                  }),
-                  _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row mb-0" }, [
+                _c("div", { staticClass: "col-md-8 offset-md-4" }, [
                   _c(
-                    "span",
+                    "button",
                     {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
                     },
-                    [_c("strong", [_vm._v("Bericht hier")])]
+                    [
+                      _vm._v(
+                        "\n                                  " +
+                          _vm._s(_vm.fields["submit"]) +
+                          "\n                              "
+                      )
+                    ]
                   )
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("input", {
+        staticClass: "form-control is-invalid",
+        attrs: {
+          id: "email",
+          type: "email",
+          name: "email",
+          value: "",
+          required: "",
+          autocomplete: "email",
+          autofocus: ""
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "span",
+        { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+        [_c("strong", [_vm._v("Error hier")])]
+      )
     ])
   }
 ]
