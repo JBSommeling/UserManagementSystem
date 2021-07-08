@@ -72,6 +72,10 @@ export default {
     },
 
     methods: {
+        /**
+         * Method to submit and validate email. If true, the question will be
+         * retrieved.
+         */
         submitEmail() {
             this.errors = '';
             axios.post(`/api/email/validate`, { email: this.email })
@@ -81,6 +85,10 @@ export default {
             .then(data => this.question = data.data);
         },
 
+        /**
+         * Method to submit the answer to the question. If the question is legit, the user is able to 
+         * edit the password.
+         */
         submitAnswer() {
             this.errors = '';
             // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.

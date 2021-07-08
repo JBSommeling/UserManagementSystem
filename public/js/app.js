@@ -1916,6 +1916,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    /**
+     * Method to submit and validate email. If true, the question will be
+     * retrieved.
+     */
     submitEmail: function submitEmail() {
       var _this = this;
 
@@ -1928,6 +1932,11 @@ __webpack_require__.r(__webpack_exports__);
         return _this.question = data.data;
       });
     },
+
+    /**
+     * Method to submit the answer to the question. If the question is legit, the user is able to 
+     * edit the password.
+     */
     submitAnswer: function submitAnswer() {
       this.errors = ''; // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
     }
