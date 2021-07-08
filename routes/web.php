@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
@@ -15,6 +16,9 @@ use App\Http\Controllers\User\UserController;
 |
 */
 Auth::routes();
+
+// Routes for passwords
+Route::get('/password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('forgot.password.reset');
 
 // Route for homepage (invokable)
 Route::get('/', HomeController::class)->name('home');
