@@ -1877,13 +1877,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    fields: ""
+    fields: Object
+  },
+  data: function data() {
+    return {
+      email: '',
+      question: '',
+      answer: '',
+      errors: ''
+    };
   },
   methods: {
-    submit: function submit() {
-      axios.post;
+    submitEmail: function submitEmail() {
+      var _this = this;
+
+      this.errors = '';
+      axios.post("/api/email/validate", {
+        email: this.email
+      })["catch"](function (err) {
+        return _this.errors = err.response.data.errors.email;
+      }).then(function (data) {
+        return _this.question = data.data;
+      });
+    },
+    submitAnswer: function submitAnswer() {
+      this.errors = ''; // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
     }
   }
 });
@@ -37449,84 +37495,204 @@ var render = function() {
           _vm._v(_vm._s(_vm.fields["title"]))
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "POST" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.submit.apply(null, arguments)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v(_vm._s(_vm.fields["email"]))]
-                ),
-                _vm._v(" "),
-                _vm._m(0)
+        this.question
+          ? _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("p", { staticClass: "col-12" }, [
+                  _vm._v(_vm._s(this.question))
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group row mb-0" }, [
-                _c("div", { staticClass: "col-md-8 offset-md-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                  " +
-                          _vm._s(_vm.fields["submit"]) +
-                          "\n                              "
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitAnswer.apply(null, arguments)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 col-form-label text-md-right",
+                        attrs: { for: "answer" }
+                      },
+                      [_vm._v(_vm._s(_vm.fields["answer"]))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.answer,
+                            expression: "answer"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": this.errors },
+                        attrs: {
+                          id: "answer",
+                          type: "text",
+                          name: "answer",
+                          required: "",
+                          autocomplete: "answer",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.answer },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.answer = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              attrs: { role: "alert" }
+                            },
+                            _vm._l(_vm.errors, function(error, index) {
+                              return _c("strong", { key: "index" }, [
+                                _vm._v(_vm._s(error))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-0" }, [
+                    _c("div", { staticClass: "col-md-8 offset-md-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                  " +
+                              _vm._s(_vm.fields["submit"]) +
+                              "\n                              "
+                          )
+                        ]
                       )
-                    ]
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          : _c("div", { staticClass: "card-body" }, [
+              _c(
+                "form",
+                {
+                  attrs: { method: "POST" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitEmail.apply(null, arguments)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 col-form-label text-md-right",
+                        attrs: { for: "email" }
+                      },
+                      [_vm._v(_vm._s(_vm.fields["email"]))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": this.errors },
+                        attrs: {
+                          id: "email",
+                          type: "email",
+                          name: "email",
+                          required: "",
+                          autocomplete: "email",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              attrs: { role: "alert" }
+                            },
+                            _vm._l(_vm.errors, function(error, index) {
+                              return _c("strong", { key: "index" }, [
+                                _vm._v(_vm._s(error))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-0" }, [
+                    _c("div", { staticClass: "col-md-8 offset-md-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                  " +
+                              _vm._s(_vm.fields["submit"]) +
+                              "\n                              "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("input", {
-        staticClass: "form-control is-invalid",
-        attrs: {
-          id: "email",
-          type: "email",
-          name: "email",
-          value: "",
-          required: "",
-          autocomplete: "email",
-          autofocus: ""
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-        [_c("strong", [_vm._v("Error hier")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

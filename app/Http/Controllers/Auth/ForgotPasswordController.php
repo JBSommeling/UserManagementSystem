@@ -23,6 +23,7 @@ class ForgotPasswordController extends Controller
         $translatedFields = json_encode([
             'title' => trans('forms.reset'),
             'email' => trans('forms.email'),
+            'answer' => trans('forms.answer'),
             'submit' => trans('buttons.submit'),
         ]);
 

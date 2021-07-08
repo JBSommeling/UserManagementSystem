@@ -4,15 +4,41 @@
             <div class="card">
                 <div class="card-header">{{ fields['title'] }}</div>
 
-                <div class="card-body">
-                    <form method="POST" @submit.prevent="submit">
+                <div v-if="this.question" class="card-body">
+                    <div class="row">
+                          <p class="col-12">{{ this.question }}</p>
+                    </div>
+                  
+                    <form method="POST" @submit.prevent="submitAnswer">
+                        <div class="form-group row">
+                            <label for="answer" class="col-md-4 col-form-label text-md-right">{{ fields['answer'] }}</label>
+
+                            <div class="col-md-6">
+                                <input id="answer" type="text" class="form-control" :class="{'is-invalid' : this.errors}" name="answer" v-model="answer" required autocomplete="answer" autofocus>
+                                <span v-if="errors" class="invalid-feedback" role="alert">
+                                    <strong v-for="(error, index) in errors" key="index">{{ error }}</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ fields['submit'] }}
+                                </button>                               
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div v-else class="card-body">
+                    <form method="POST" @submit.prevent="submitEmail">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ fields['email']}}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control is-invalid" name="email" value="" required autocomplete="email" autofocus>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>Error hier</strong>
+                                <input id="email" type="email" class="form-control" :class="{'is-invalid' : this.errors}" name="email" v-model="email" required autocomplete="email" autofocus>
+                                <span v-if="errors" class="invalid-feedback" role="alert">
+                                    <strong v-for="(error, index) in errors" key="index">{{ error }}</strong>
                                 </span>
                             </div>
                         </div>
@@ -33,11 +59,31 @@
 <script>
 export default {
     props: {
-        fields: "",
+        fields: Object,
     },
+
+    data() {
+        return {
+            email: '',
+            question: '',
+            answer: '',
+            errors: '',
+        }
+    },
+
     methods: {
-        submit() {
-            axios.post
+        submitEmail() {
+            this.errors = '';
+            axios.post(`/api/email/validate`, { email: this.email })
+            .catch(err => {
+                return this.errors = err.response.data.errors.email 
+            })
+            .then(data => this.question = data.data);
+        },
+
+        submitAnswer() {
+            this.errors = '';
+            // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
         }
     }
 }
