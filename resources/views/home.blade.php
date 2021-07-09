@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    @if(Request::exists('message'))
+        <div class="alert alert-success">
+            {{ __('messages.password_changed') }}
+        </div>
+    @endif
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

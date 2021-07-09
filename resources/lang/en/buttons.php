@@ -4,6 +4,7 @@
      * @return array
      */
     return [
-        'register' => "Register"
+        'register' => "Register",
+        'submit' => "Submit",
     ]
 ?>

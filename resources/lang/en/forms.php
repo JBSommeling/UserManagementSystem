@@ -5,6 +5,10 @@
      */
 
     return [
+        //Titles
+        'reset' => 'Reset Password',
+
+        // Fields
         'surname' => 'Surname',
         'lastname' => 'Lastname',
         'email' => 'E-mail Adress',

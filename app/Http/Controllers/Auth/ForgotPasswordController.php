@@ -3,20 +3,33 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ * ForgotPasswordController
+ * Controller that manages incoming forgotten password requests.
+ */
 class ForgotPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
-    |
-    */
+    
+    /**
+     * resetPassword
+     * Method to render view which validates email and resets password.
+     * 
+     * @return void
+     */
+    public function resetPassword() {
+        $translatedFields = json_encode([
+            'title' => trans('forms.reset'),
+            'email' => trans('forms.email'),
+            'answer' => trans('forms.answer'),
+            'submit' => trans('buttons.submit'),
+            'answer_not_found' => trans('passwords.answer_not_found'),
+            'password' => trans('forms.password'),
+            'password_confirm' => trans('forms.confirm_password'),
+        ]);
 
-    use SendsPasswordResetEmails;
+        return view('auth.passwords.reset', compact('translatedFields'));
+    }
 }
