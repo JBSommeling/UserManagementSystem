@@ -137,8 +137,9 @@ export default {
         changePassword() {
             this.errors = '';
             axios.post(`/api/password/reset`, { password: this.password, password_confirmation: this.password_confirm, email: this.email })
-            .catch(err => this.errors = err.response.data.errors.password)
-            .then(data => window.location.href = '/?message=password_changed');
+            .then(data => window.location.href = '/?message=password_changed')
+            .catch(err => this.errors = err.response.data.errors.password);
+            
         }
     }
 }

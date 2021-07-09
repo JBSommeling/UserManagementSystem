@@ -1993,10 +1993,10 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password,
         password_confirmation: this.password_confirm,
         email: this.email
-      })["catch"](function (err) {
-        return _this3.errors = err.response.data.errors.password;
       }).then(function (data) {
         return window.location.href = '/?message=password_changed';
+      })["catch"](function (err) {
+        return _this3.errors = err.response.data.errors.password;
       });
     }
   }
