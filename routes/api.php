@@ -25,3 +25,4 @@ Route::post('/email/validate', EmailController::class)->name('email.validate');
 
 // Password routes
 Route::post('/password/compare', [ForgotPasswordController::class, 'compare'])->name('password.answer.compare');
+Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');

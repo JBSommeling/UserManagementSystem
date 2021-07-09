@@ -1915,6 +1915,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1929,7 +1940,9 @@ __webpack_require__.r(__webpack_exports__);
       question: '',
       answer: '',
       errors: '',
-      allowed: ''
+      allowed: '',
+      password: '',
+      password_confirm: ''
     };
   },
   methods: {
@@ -1967,6 +1980,24 @@ __webpack_require__.r(__webpack_exports__);
         _this2.allowed = allowance.data;
         if (_this2.allowed == false) _this2.errors = _this2.fields['answer_not_found'];
       });
+    },
+
+    /**
+     * Method submit the new password to the Api.
+     */
+    changePassword: function changePassword() {
+      var _this3 = this;
+
+      this.errors = '';
+      axios.post("/api/password/reset", {
+        password: this.password,
+        password_confirmation: this.password_confirm,
+        email: this.email
+      })["catch"](function (err) {
+        return _this3.errors = err.response.data.errors.password;
+      }).then(function (data) {
+        return window.location.href = '/?message=password_changed';
+      });
     }
   }
 });
@@ -2002,7 +2033,7 @@ __webpack_require__.r(__webpack_exports__);
     label: String,
     errors: '',
     name: String,
-    type: 'text'
+    type: ''
   },
   data: function data() {
     return {
@@ -37655,7 +37686,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.allowed
-          ? _c("div", [
+          ? _c("div", { staticClass: "card-body" }, [
               _c(
                 "form",
                 {
@@ -37663,7 +37694,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.submitAnswer.apply(null, arguments)
+                      return _vm.changePassword.apply(null, arguments)
                     }
                   }
                 },
@@ -37671,15 +37702,31 @@ var render = function() {
                   _c("text-input", {
                     attrs: {
                       errors: this.errors,
-                      label: _vm.fields["answer"],
-                      name: "answer"
+                      label: _vm.fields["password"],
+                      name: "password",
+                      type: "password"
                     },
                     model: {
-                      value: _vm.answer,
+                      value: _vm.password,
                       callback: function($$v) {
-                        _vm.answer = $$v
+                        _vm.password = $$v
                       },
-                      expression: "answer"
+                      expression: "password"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("text-input", {
+                    attrs: {
+                      label: _vm.fields["password_confirm"],
+                      name: "password-confirm",
+                      type: "password"
+                    },
+                    model: {
+                      value: _vm.password_confirm,
+                      callback: function($$v) {
+                        _vm.password_confirm = $$v
+                      },
+                      expression: "password_confirm"
                     }
                   }),
                   _vm._v(" "),
@@ -37730,7 +37777,8 @@ var render = function() {
                           attrs: {
                             errors: this.errors,
                             label: _vm.fields["answer"],
-                            name: "answer"
+                            name: "answer",
+                            type: "text"
                           },
                           model: {
                             value: _vm.answer,
@@ -37780,7 +37828,8 @@ var render = function() {
                           attrs: {
                             errors: this.errors,
                             label: _vm.fields["email"],
-                            name: "email"
+                            name: "email",
+                            type: "text"
                           },
                           model: {
                             value: _vm.email,

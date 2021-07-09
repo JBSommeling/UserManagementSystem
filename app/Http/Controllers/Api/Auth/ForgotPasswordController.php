@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnswerValidationRequest;
+use App\Http\Requests\ResetPasswordValidationRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,5 +21,18 @@ class ForgotPasswordController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         return $user->answer === $request->answer? true : false;
+    }
+
+    /**
+     * Method to reset the password.
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function resetPassword(ResetPasswordValidationRequest $request) 
+    {
+        $user = User::where('email', $request->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
     }
 }

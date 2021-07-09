@@ -17,7 +17,7 @@ export default {
         label: String,
         errors: '',
         name: String,
-        type: 'text'
+        type: ''
     },
     data() {
         return {

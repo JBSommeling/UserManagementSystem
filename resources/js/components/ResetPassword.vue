@@ -3,14 +3,23 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ fields['title'] }}</div>
-                <div v-if="allowed">
-                    <form method="POST" @submit.prevent="submitAnswer">
+                <div v-if="allowed" class="card-body">
+                    <form method="POST" @submit.prevent="changePassword">
                             <text-input
                                 :errors="this.errors"
-                                :label="fields['answer']"
-                                :name="'answer'"
-                                v-model="answer"
+                                :label="fields['password']"
+                                :name="'password'"
+                                v-model="password"
+                                :type="'password'"
                             ></text-input>
+
+                            <text-input
+                                :label="fields['password_confirm']"
+                                :name="'password-confirm'"
+                                v-model="password_confirm"
+                                :type="'password'"
+                            ></text-input>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -32,6 +41,7 @@
                                 :label="fields['answer']"
                                 :name="'answer'"
                                 v-model="answer"
+                                :type="'text'"
                             ></text-input>
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
@@ -50,6 +60,7 @@
                                 :label="fields['email']"
                                 :name="'email'"
                                 v-model="email"
+                                :type="'text'"
                             ></text-input>
 
                             <div class="form-group row mb-0">
@@ -85,6 +96,9 @@ export default {
             answer: '',
             errors: '',
             allowed: '',
+
+            password: '',
+            password_confirm: '',
         }
     },
 
@@ -115,6 +129,16 @@ export default {
                 if (this.allowed == false)
                     this.errors = this.fields['answer_not_found'];
             });        
+        },
+
+        /**
+         * Method submit the new password to the Api.
+         */
+        changePassword() {
+            this.errors = '';
+            axios.post(`/api/password/reset`, { password: this.password, password_confirmation: this.password_confirm, email: this.email })
+            .catch(err => this.errors = err.response.data.errors.password)
+            .then(data => window.location.href = '/?message=password_changed');
         }
     }
 }
