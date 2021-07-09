@@ -10,7 +10,7 @@ use App\Http\Requests\EmailValidationRequest;
 class EmailController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Method to validate email and search for the question that belongs to the user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

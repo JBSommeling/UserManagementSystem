@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmailValidationRequest extends FormRequest
+class AnswerValidationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class EmailValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:255|exists:users'
+            'answer' => 'required|string|min:3|max:255',
         ];
     }
 }

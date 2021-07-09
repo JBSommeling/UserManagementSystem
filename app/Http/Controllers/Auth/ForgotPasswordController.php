@@ -25,6 +25,7 @@ class ForgotPasswordController extends Controller
             'email' => trans('forms.email'),
             'answer' => trans('forms.answer'),
             'submit' => trans('buttons.submit'),
+            'answer_not_found' => trans('passwords.answer_not_found'),
         ]);
 
         return view('auth.passwords.reset', compact('translatedFields'));

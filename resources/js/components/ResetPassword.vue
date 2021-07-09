@@ -3,46 +3,64 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ fields['title'] }}</div>
-
-                <div v-if="this.question" class="card-body">
-                    <div class="row">
-                          <p class="col-12">{{ this.question }}</p>
-                    </div>
-                  
+                <div v-if="allowed">
                     <form method="POST" @submit.prevent="submitAnswer">
-                        <text-input
-                            :errors="this.errors"
-                            :label="fields['answer']"
-                            :name="'answer'"
-                            v-model="answer"
-                        ></text-input>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ fields['submit'] }}
-                                </button>                               
+                            <text-input
+                                :errors="this.errors"
+                                :label="fields['answer']"
+                                :name="'answer'"
+                                v-model="answer"
+                            ></text-input>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ fields['submit'] }}
+                                    </button>                               
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                 </div>
-
-                <div v-else class="card-body">
-                    <form method="POST" @submit.prevent="submitEmail">
-                        <text-input
-                            :errors="this.errors"
-                            :label="fields['email']"
-                            :name="'email'"
-                            v-model="email"
-                        ></text-input>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ fields['submit'] }}
-                                </button>                               
-                            </div>
+                <div v-else>
+                    <div v-if="this.question" class="card-body">
+                        <div class="row">
+                            <p class="col-12">{{ this.question }}</p>
                         </div>
-                    </form>
+                    
+                        <form method="POST" @submit.prevent="submitAnswer">
+                            <text-input
+                                :errors="this.errors"
+                                :label="fields['answer']"
+                                :name="'answer'"
+                                v-model="answer"
+                            ></text-input>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ fields['submit'] }}
+                                    </button>                               
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div v-else class="card-body">
+                        <form method="POST" @submit.prevent="submitEmail">
+                            <text-input
+                                :errors="this.errors"
+                                :label="fields['email']"
+                                :name="'email'"
+                                v-model="email"
+                            ></text-input>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ fields['submit'] }}
+                                    </button>                               
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,6 +84,7 @@ export default {
             question: '',
             answer: '',
             errors: '',
+            allowed: '',
         }
     },
 
@@ -89,7 +108,13 @@ export default {
          */
         submitAnswer() {
             this.errors = '';
-            // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
+            axios.post(`/api/password/compare`, {answer: this.answer, email: this.email})
+            .catch(err => this.errors = err.response.data.errors.answer)
+            .then(allowance => {
+                this.allowed = allowance.data;
+                if (this.allowed == false)
+                    this.errors = this.fields['answer_not_found'];
+            });        
         }
     }
 }

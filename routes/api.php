@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\EmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Email route
 Route::post('/email/validate', EmailController::class)->name('email.validate');
+
+// Password routes
+Route::post('/password/compare', [ForgotPasswordController::class, 'compare'])->name('password.answer.compare');

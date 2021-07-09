@@ -18,5 +18,6 @@ return [
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that email address.",
+    'answer_not_found' => "We can't find the answer to that question.",
 
 ];

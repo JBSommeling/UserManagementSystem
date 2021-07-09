@@ -1897,6 +1897,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1910,7 +1928,8 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       question: '',
       answer: '',
-      errors: ''
+      errors: '',
+      allowed: ''
     };
   },
   methods: {
@@ -1936,7 +1955,18 @@ __webpack_require__.r(__webpack_exports__);
      * edit the password.
      */
     submitAnswer: function submitAnswer() {
-      this.errors = ''; // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
+      var _this2 = this;
+
+      this.errors = '';
+      axios.post("/api/password/compare", {
+        answer: this.answer,
+        email: this.email
+      })["catch"](function (err) {
+        return _this2.errors = err.response.data.errors.answer;
+      }).then(function (allowance) {
+        _this2.allowed = allowance.data;
+        if (_this2.allowed == false) _this2.errors = _this2.fields['answer_not_found'];
+      });
     }
   }
 });
@@ -1971,7 +2001,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     label: String,
     errors: '',
-    name: String
+    name: String,
+    type: 'text'
   },
   data: function data() {
     return {
@@ -37623,14 +37654,8 @@ var render = function() {
           _vm._v(_vm._s(_vm.fields["title"]))
         ]),
         _vm._v(" "),
-        this.question
-          ? _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("p", { staticClass: "col-12" }, [
-                  _vm._v(_vm._s(this.question))
-                ])
-              ]),
-              _vm._v(" "),
+        _vm.allowed
+          ? _c("div", [
               _c(
                 "form",
                 {
@@ -37668,9 +37693,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                  " +
+                            "\n                                      " +
                               _vm._s(_vm.fields["submit"]) +
-                              "\n                              "
+                              "\n                                  "
                           )
                         ]
                       )
@@ -37680,55 +37705,114 @@ var render = function() {
                 1
               )
             ])
-          : _c("div", { staticClass: "card-body" }, [
-              _c(
-                "form",
-                {
-                  attrs: { method: "POST" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.submitEmail.apply(null, arguments)
-                    }
-                  }
-                },
-                [
-                  _c("text-input", {
-                    attrs: {
-                      errors: this.errors,
-                      label: _vm.fields["email"],
-                      name: "email"
-                    },
-                    model: {
-                      value: _vm.email,
-                      callback: function($$v) {
-                        _vm.email = $$v
+          : _c("div", [
+              this.question
+                ? _c("div", { staticClass: "card-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("p", { staticClass: "col-12" }, [
+                        _vm._v(_vm._s(this.question))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "POST" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitAnswer.apply(null, arguments)
+                          }
+                        }
                       },
-                      expression: "email"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row mb-0" }, [
-                    _c("div", { staticClass: "col-md-8 offset-md-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                  " +
-                              _vm._s(_vm.fields["submit"]) +
-                              "\n                              "
-                          )
-                        ]
-                      )
-                    ])
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            errors: this.errors,
+                            label: _vm.fields["answer"],
+                            name: "answer"
+                          },
+                          model: {
+                            value: _vm.answer,
+                            callback: function($$v) {
+                              _vm.answer = $$v
+                            },
+                            expression: "answer"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row mb-0" }, [
+                          _c("div", { staticClass: "col-md-8 offset-md-4" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                      " +
+                                    _vm._s(_vm.fields["submit"]) +
+                                    "\n                                  "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ],
+                      1
+                    )
                   ])
-                ],
-                1
-              )
+                : _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "POST" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitEmail.apply(null, arguments)
+                          }
+                        }
+                      },
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            errors: this.errors,
+                            label: _vm.fields["email"],
+                            name: "email"
+                          },
+                          model: {
+                            value: _vm.email,
+                            callback: function($$v) {
+                              _vm.email = $$v
+                            },
+                            expression: "email"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row mb-0" }, [
+                          _c("div", { staticClass: "col-md-8 offset-md-4" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                      " +
+                                    _vm._s(_vm.fields["submit"]) +
+                                    "\n                                  "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ],
+                      1
+                    )
+                  ])
             ])
       ])
     ])
@@ -37768,35 +37852,109 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-6" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.inputVal,
-            expression: "inputVal"
-          }
-        ],
-        staticClass: "form-control",
-        class: { "is-invalid": this.errors },
-        attrs: {
-          id: this.name,
-          type: "text",
-          name: this.name,
-          required: "",
-          autocomplete: this.name,
-          autofocus: ""
-        },
-        domProps: { value: _vm.inputVal },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      this.type === "checkbox"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inputVal,
+                expression: "inputVal"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": this.errors },
+            attrs: {
+              id: this.name,
+              name: this.name,
+              required: "",
+              autocomplete: this.name,
+              autofocus: "",
+              type: "checkbox"
+            },
+            domProps: {
+              checked: Array.isArray(_vm.inputVal)
+                ? _vm._i(_vm.inputVal, null) > -1
+                : _vm.inputVal
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.inputVal,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.inputVal = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.inputVal = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.inputVal = $$c
+                }
+              }
             }
-            _vm.inputVal = $event.target.value
-          }
-        }
-      }),
+          })
+        : this.type === "radio"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inputVal,
+                expression: "inputVal"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": this.errors },
+            attrs: {
+              id: this.name,
+              name: this.name,
+              required: "",
+              autocomplete: this.name,
+              autofocus: "",
+              type: "radio"
+            },
+            domProps: { checked: _vm._q(_vm.inputVal, null) },
+            on: {
+              change: function($event) {
+                _vm.inputVal = null
+              }
+            }
+          })
+        : _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inputVal,
+                expression: "inputVal"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": this.errors },
+            attrs: {
+              id: this.name,
+              name: this.name,
+              required: "",
+              autocomplete: this.name,
+              autofocus: "",
+              type: this.type
+            },
+            domProps: { value: _vm.inputVal },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.inputVal = $event.target.value
+              }
+            }
+          }),
       _vm._v(" "),
       _vm.errors
         ? _c(
