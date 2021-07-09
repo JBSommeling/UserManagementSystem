@@ -10,16 +10,12 @@
                     </div>
                   
                     <form method="POST" @submit.prevent="submitAnswer">
-                        <div class="form-group row">
-                            <label for="answer" class="col-md-4 col-form-label text-md-right">{{ fields['answer'] }}</label>
-
-                            <div class="col-md-6">
-                                <input id="answer" type="text" class="form-control" :class="{'is-invalid' : this.errors}" name="answer" v-model="answer" required autocomplete="answer" autofocus>
-                                <span v-if="errors" class="invalid-feedback" role="alert">
-                                    <strong v-for="(error, index) in errors" key="index">{{ error }}</strong>
-                                </span>
-                            </div>
-                        </div>
+                        <text-input
+                            :errors="this.errors"
+                            :label="fields['answer']"
+                            :name="'answer'"
+                            v-model="answer"
+                        ></text-input>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -32,16 +28,13 @@
 
                 <div v-else class="card-body">
                     <form method="POST" @submit.prevent="submitEmail">
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ fields['email']}}</label>
+                        <text-input
+                            :errors="this.errors"
+                            :label="fields['email']"
+                            :name="'email'"
+                            v-model="email"
+                        ></text-input>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" :class="{'is-invalid' : this.errors}" name="email" v-model="email" required autocomplete="email" autofocus>
-                                <span v-if="errors" class="invalid-feedback" role="alert">
-                                    <strong v-for="(error, index) in errors" key="index">{{ error }}</strong>
-                                </span>
-                            </div>
-                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -57,7 +50,12 @@
 </template>
 
 <script>
+import Text from './inputs/Text.vue'
+
 export default {
+    components: {
+        TextInput: Text,
+    },
     props: {
         fields: Object,
     },

@@ -1845,6 +1845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _inputs_Text_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inputs/Text.vue */ "./resources/js/components/inputs/Text.vue");
 //
 //
 //
@@ -1896,14 +1897,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    TextInput: _inputs_Text_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
   props: {
     fields: Object
   },
@@ -1939,6 +1937,55 @@ __webpack_require__.r(__webpack_exports__);
      */
     submitAnswer: function submitAnswer() {
       this.errors = ''; // Eem validation in de controller maken met email en antwoord. Deze moeten samen kloppen. Daarna kun je wachtwoord wijzigen.
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    label: String,
+    errors: '',
+    name: String
+  },
+  data: function data() {
+    return {
+      value: ''
+    };
+  },
+  computed: {
+    inputVal: {
+      get: function get() {
+        return this.value;
+      },
+      set: function set(val) {
+        this.$emit('input', val);
+      }
     }
   }
 });
@@ -37448,6 +37495,45 @@ component.options.__file = "resources/js/components/ResetPassword.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/inputs/Text.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/inputs/Text.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Text.vue?vue&type=template&id=210e6338& */ "./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338&");
+/* harmony import */ var _Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Text.vue?vue&type=script&lang=js& */ "./resources/js/components/inputs/Text.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/inputs/Text.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ResetPassword.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/ResetPassword.vue?vue&type=script&lang=js& ***!
@@ -37464,6 +37550,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/inputs/Text.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/inputs/Text.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Text.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ResetPassword.vue?vue&type=template&id=d837f8a2&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/ResetPassword.vue?vue&type=template&id=d837f8a2& ***!
@@ -37477,6 +37579,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_d837f8a2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_d837f8a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ResetPassword.vue?vue&type=template&id=d837f8a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ResetPassword.vue?vue&type=template&id=d837f8a2&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Text_vue_vue_type_template_id_210e6338___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Text.vue?vue&type=template&id=210e6338& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338&");
 
 
 /***/ }),
@@ -37524,64 +37643,20 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 col-form-label text-md-right",
-                        attrs: { for: "answer" }
+                  _c("text-input", {
+                    attrs: {
+                      errors: this.errors,
+                      label: _vm.fields["answer"],
+                      name: "answer"
+                    },
+                    model: {
+                      value: _vm.answer,
+                      callback: function($$v) {
+                        _vm.answer = $$v
                       },
-                      [_vm._v(_vm._s(_vm.fields["answer"]))]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.answer,
-                            expression: "answer"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: { "is-invalid": this.errors },
-                        attrs: {
-                          id: "answer",
-                          type: "text",
-                          name: "answer",
-                          required: "",
-                          autocomplete: "answer",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.answer },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.answer = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors
-                        ? _c(
-                            "span",
-                            {
-                              staticClass: "invalid-feedback",
-                              attrs: { role: "alert" }
-                            },
-                            _vm._l(_vm.errors, function(error, index) {
-                              return _c("strong", { key: "index" }, [
-                                _vm._v(_vm._s(error))
-                              ])
-                            }),
-                            0
-                          )
-                        : _vm._e()
-                    ])
-                  ]),
+                      expression: "answer"
+                    }
+                  }),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row mb-0" }, [
                     _c("div", { staticClass: "col-md-8 offset-md-4" }, [
@@ -37601,7 +37676,8 @@ var render = function() {
                       )
                     ])
                   ])
-                ]
+                ],
+                1
               )
             ])
           : _c("div", { staticClass: "card-body" }, [
@@ -37617,64 +37693,20 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-md-4 col-form-label text-md-right",
-                        attrs: { for: "email" }
+                  _c("text-input", {
+                    attrs: {
+                      errors: this.errors,
+                      label: _vm.fields["email"],
+                      name: "email"
+                    },
+                    model: {
+                      value: _vm.email,
+                      callback: function($$v) {
+                        _vm.email = $$v
                       },
-                      [_vm._v(_vm._s(_vm.fields["email"]))]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.email,
-                            expression: "email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: { "is-invalid": this.errors },
-                        attrs: {
-                          id: "email",
-                          type: "email",
-                          name: "email",
-                          required: "",
-                          autocomplete: "email",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.email = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors
-                        ? _c(
-                            "span",
-                            {
-                              staticClass: "invalid-feedback",
-                              attrs: { role: "alert" }
-                            },
-                            _vm._l(_vm.errors, function(error, index) {
-                              return _c("strong", { key: "index" }, [
-                                _vm._v(_vm._s(error))
-                              ])
-                            }),
-                            0
-                          )
-                        : _vm._e()
-                    ])
-                  ]),
+                      expression: "email"
+                    }
+                  }),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row mb-0" }, [
                     _c("div", { staticClass: "col-md-8 offset-md-4" }, [
@@ -37694,10 +37726,88 @@ var render = function() {
                       )
                     ])
                   ])
-                ]
+                ],
+                1
               )
             ])
       ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/inputs/Text.vue?vue&type=template&id=210e6338& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group row" }, [
+    _c(
+      "label",
+      {
+        staticClass: "col-md-4 col-form-label text-md-right",
+        attrs: { for: "answer" }
+      },
+      [_vm._v(_vm._s(this.label))]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.inputVal,
+            expression: "inputVal"
+          }
+        ],
+        staticClass: "form-control",
+        class: { "is-invalid": this.errors },
+        attrs: {
+          id: this.name,
+          type: "text",
+          name: this.name,
+          required: "",
+          autocomplete: this.name,
+          autofocus: ""
+        },
+        domProps: { value: _vm.inputVal },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.inputVal = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm.errors
+        ? _c(
+            "span",
+            { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+            _vm._l(this.errors, function(error, index) {
+              return _c("strong", { key: index }, [_vm._v(_vm._s(error))])
+            }),
+            0
+          )
+        : _vm._e()
     ])
   ])
 }
