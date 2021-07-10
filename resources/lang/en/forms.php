@@ -9,7 +9,7 @@
         'reset' => 'Reset Password',
 
         // Fields
-        'name' => 'name',
+        'name' => 'Name',
         'lastname' => 'Lastname',
         'email' => 'E-mail Adress',
         'password' => 'Password',
