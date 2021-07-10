@@ -23,6 +23,7 @@ class User extends Authenticatable
         'question',
         'answer',
         'password',
+        'role',
     ];
 
     /**
