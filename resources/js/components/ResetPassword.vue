@@ -136,10 +136,22 @@ export default {
          */
         changePassword() {
             this.errors = '';
-            axios.post(`/api/password/reset`, { password: this.password, password_confirmation: this.password_confirm, email: this.email })
+            axios.post(`/api/password/reset`, { 
+                    password: this.password, 
+                    password_confirmation: this.password_confirm, 
+                    email: this.email,
+                    answer: this.answer,
+                })
             .then(data => window.location.href = '/?message=password_changed')
-            .catch(err => this.errors = err.response.data.errors.password);
-            
+            .catch(err => 
+                {
+                    // Show error if access is forbidden
+                    if (err.response.status == 403)
+                     window.location.href = '/403';
+                    
+                    // else just give error if any.
+                    this.errors = err.response.data.errors.password;
+                });
         }
     }
 }

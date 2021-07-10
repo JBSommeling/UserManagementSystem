@@ -29,3 +29,8 @@ Route::resource('users', UserController::class);
 
 // Routes for admin
 Route::get('/admin', AdminController::class)->name('admin.panel');
+
+// Routes for errors
+Route::get('/403', function () {
+    return abort(403);
+});

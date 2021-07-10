@@ -32,7 +32,12 @@ class ForgotPasswordController extends Controller
     public function resetPassword(ResetPasswordValidationRequest $request) 
     {
         $user = User::where('email', $request->email)->first();
-        $user->password = Hash::make($request->password);
-        $user->save();
+
+        if ($request->answer === $user->answer) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+        } else {
+            abort(403);
+        }
     }
 }

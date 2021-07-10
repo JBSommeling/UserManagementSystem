@@ -1992,11 +1992,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/password/reset", {
         password: this.password,
         password_confirmation: this.password_confirm,
-        email: this.email
+        email: this.email,
+        answer: this.answer
       }).then(function (data) {
         return window.location.href = '/?message=password_changed';
       })["catch"](function (err) {
-        return _this3.errors = err.response.data.errors.password;
+        // Show error if access is forbidden
+        if (err.response.status == 403) window.location.href = '/403'; // else just give error if any.
+
+        _this3.errors = err.response.data.errors.password;
       });
     }
   }
