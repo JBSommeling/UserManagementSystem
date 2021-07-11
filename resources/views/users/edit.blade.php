@@ -17,7 +17,7 @@
 
                             <div class="col-md-6">
                                 @if ($key === 'password' || $key === 'password_confirmation')
-                                    <input id="{{ $key }}" type="password" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key) }}{{ $field }}" required autocomplete="{{$key}}" autofocus>
+                                    <input id="{{ $key }}" type="password" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key) }}{{ $field }}" autocomplete="{{$key}}" autofocus>
                                 @else 
                                     <input id="{{ $key }}" type="text" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key) }}{{ $field }}" required autocomplete="{{$key}}" autofocus>
                                 @endif
