@@ -16,7 +16,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('isSameUser');
+        $this->middleware('isSameUser', ['except' => 'index']);
     }
 
     /**
@@ -69,8 +69,19 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);      
-        return view('users.edit', compact('user'));
+        $user = User::findOrFail($id);  
+        
+        $fields = [
+            'name' => $user->name,
+            'lastname' => $user->lastname,
+            'email' => $user->email,
+            'password' => '',
+            'password_confirmation' => '',
+            'question' => $user->question,
+            'answer' => $user->answer,
+        ];
+        
+        return view('users.edit', compact('fields'));
     }
 
     /**
