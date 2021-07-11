@@ -64,6 +64,10 @@
                                         </a>
                                     @endcan
 
+                                    <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">
+                                        {{ __('navigation.edit_credentials') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
