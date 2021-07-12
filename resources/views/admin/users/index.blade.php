@@ -18,9 +18,11 @@
                             <div class="card">
                                 <div class="card-header" id="heading_{{ $user->id }}">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse_{{ $user->id }}" aria-expanded="true" aria-controls="collapse_{{ $user->id }}">
-                                            {{ $user->name }} {{ $user->lastname }}
+                                        <button class="btn btn-link text-left m-2" type="button" data-toggle="collapse" data-target="#collapse_{{ $user->id }}" aria-expanded="true" aria-controls="collapse_{{ $user->id }}">
+                                            {{ $user->name }} {{ $user->lastname }} 
                                         </button>
+                                        <button class="btn btn-danger float-right m-2">{{ __('buttons.delete_user') }}</button>
+                                        <button class="btn btn-success float-right m-2">{{ __('buttons.edit_user') }}</button>
                                     </h2>
                                 </div>
 
