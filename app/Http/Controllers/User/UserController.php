@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EditCredentialsRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -116,12 +117,15 @@ class UserController extends Controller
                     'email',
                     'question',
                     'answer',
+                    'password',
                 ]
             );
 
         // If the password is blank then use old password.
         if (empty($request->password)) {
             $data['password'] = $user->password;
+        } else {
+            $data['password'] = Hash::make($request->password);
         }
         
         // Update the given data in the user model.
