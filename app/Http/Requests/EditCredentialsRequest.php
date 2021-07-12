@@ -30,7 +30,7 @@ class EditCredentialsRequest extends FormRequest
             'email' => 'required|string|email|max:255',
             'question' => 'required|string|min:8|max:255',
             'answer' => 'required|string|min:3|max:255',
-            'password' => 'string|min:8|confirmed',
+            'password' => 'confirmed',
         ];
     }
 }

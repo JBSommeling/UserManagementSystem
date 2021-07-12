@@ -25,9 +25,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('users.index');
+        $message = $request->message;
+        return view('users.index', compact('message'));   
     }
 
     /**
@@ -70,8 +71,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        // Get user
         $user = User::findOrFail($id);  
         
+        // Array with user data and fields.
         $fields = [
             'name' => $user->name,
             'lastname' => $user->lastname,
@@ -94,9 +97,36 @@ class UserController extends Controller
      */
     public function update(EditCredentialsRequest $request, $id)
     {
-        dd('het lukte');
-    }
+        $user = User::find($id);
 
+        // To evaluate whether the given email is already in use.
+        if ($user->count !== 0 && $user->email !== $request->email) {
+            $validated = $request->validate([
+                'email' => 'unique:users'
+            ]);
+        }
+
+        // Get all request inputs.
+        $data = $request->only(
+                [
+                    'name',
+                    'lastname',
+                    'email',
+                    'question',
+                    'answer',
+                ]
+            );
+
+        // If the password is blank then use old password.
+        if (empty($request->password)) {
+            $data['password'] = $user->password;
+        }
+        
+        // Update the given data in the user model.
+        $user->update($data);
+
+        return redirect()->route('users.index', ['message' => trans('messages.credentials_edited')]);
+    }
     /**
      * Remove the specified resource from storage.
      *
