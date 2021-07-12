@@ -21,7 +21,11 @@
                                         <button class="btn btn-link text-left m-2" type="button" data-toggle="collapse" data-target="#collapse_{{ $user->id }}" aria-expanded="true" aria-controls="collapse_{{ $user->id }}">
                                             {{ $user->name }} {{ $user->lastname }} 
                                         </button>
-                                        <button class="btn btn-danger float-right m-2">{{ __('buttons.delete_user') }}</button>
+                                        <form class="d-inline-block float-right" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                            {{ method_field('DELETE') }}
+                                            @csrf
+                                            <button class="btn btn-danger float-right m-2" onclick="return confirm('Are you sure you wish to delete this user?')">{{__('buttons.delete_user')}}</button>
+                                        </form>
                                         <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-success float-right m-2">{{ __('buttons.edit_user') }}</button></a>
                                     </h2>
                                 </div>

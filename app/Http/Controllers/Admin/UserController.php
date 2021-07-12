@@ -26,10 +26,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $message = $request->message;
+        return view('admin.users.index', compact('users', 'message'));
     }
 
     /**
@@ -117,7 +118,7 @@ class UserController extends Controller
     public function update(EditCredentialsRequest $request, $id)
     {
         // To find the user.
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         // To evaluate whether the given email is already in use.
         if ($user->count !== 0 && $user->email !== $request->email) {
@@ -145,7 +146,7 @@ class UserController extends Controller
         // Update the given data in the user model.
         $user->update($data);
 
-        return redirect()->route('admin.panel', ['message' => trans('messages.user_edited')]);
+        return redirect()->route('admin.users.index', ['message' => trans('messages.user_edited')]);
     }
     /**
      * Remove the specified resource from storage.
@@ -155,6 +156,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // User ophalen
+        $user = User::findOrFail($id);
+
+        // User verwijderen
+        $user->delete();
+
+        return redirect()->route('admin.users.index', ['message' => trans('messages.user_deleted')]);
     }
 }
