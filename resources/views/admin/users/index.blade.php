@@ -22,7 +22,7 @@
                                             {{ $user->name }} {{ $user->lastname }} 
                                         </button>
                                         <button class="btn btn-danger float-right m-2">{{ __('buttons.delete_user') }}</button>
-                                        <button class="btn btn-success float-right m-2">{{ __('buttons.edit_user') }}</button>
+                                        <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-success float-right m-2">{{ __('buttons.edit_user') }}</button></a>
                                     </h2>
                                 </div>
 

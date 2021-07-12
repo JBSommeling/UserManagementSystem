@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EditCredentialsRequest;
 
 class UserController extends Controller
 {
@@ -89,7 +90,21 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Get user
+        $user = User::findOrFail($id);  
+        
+        // Array with user data and fields.
+        $fields = [
+            'name' => $user->name,
+            'lastname' => $user->lastname,
+            'email' => $user->email,
+            'password' => '',
+            'password_confirmation' => '',
+            'question' => $user->question,
+            'answer' => $user->answer,
+        ];
+        
+        return view('admin.users.edit', compact('fields', 'user'));
     }
 
     /**
@@ -99,11 +114,39 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditCredentialsRequest $request, $id)
     {
-        //
-    }
+        // To find the user.
+        $user = User::find($id);
 
+        // To evaluate whether the given email is already in use.
+        if ($user->count !== 0 && $user->email !== $request->email) {
+            $validated = $request->validate([
+                'email' => 'unique:users'
+            ]);
+        }
+
+        // Get all request inputs.
+        $data = $request->only(
+                [
+                    'name',
+                    'lastname',
+                    'email',
+                    'question',
+                    'answer',
+                ]
+            );
+
+        // If the password is blank then use old password.
+        if (empty($request->password)) {
+            $data['password'] = $user->password;
+        }
+        
+        // Update the given data in the user model.
+        $user->update($data);
+
+        return redirect()->route('admin.panel', ['message' => trans('messages.user_edited')]);
+    }
     /**
      * Remove the specified resource from storage.
      *
