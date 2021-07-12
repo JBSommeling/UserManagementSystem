@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if(Request::exists('message'))
+        <div class="alert alert-success">
+            {{ $message }}
+        </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -18,7 +23,11 @@
                                     <label for="{{ $field }}" class="col-md-4 col-form-label text-md-right">{{ __('forms.'.$field) }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="{{ $field }}" type="text" class="form-control @error($field) is-invalid @enderror" name="{{ $field }}" value="{{ old($field) }}" required autocomplete="{{$field}}" autofocus>
+                                        @if ($field === 'password' || $field === 'password_confirmation')
+                                            <input id="{{ $field }}" type="password" class="form-control @error($field) is-invalid @enderror" name="{{ $field }}" value="{{ old($field) }}" autocomplete="{{$field}}" autofocus>
+                                        @else 
+                                            <input id="{{ $field }}" type="text" class="form-control @error($field) is-invalid @enderror" name="{{ $field }}" value="{{ old($field) }}" required autocomplete="{{$field}}" autofocus>
+                                        @endif
 
                                         @error($field)
                                             <span class="invalid-feedback" role="alert">

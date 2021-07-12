@@ -34,7 +34,9 @@ class AdminController extends Controller
             'question',
             'answer',
         ];
-        
-        return view('admin.index', compact('fields'));
+        // Get message if any.
+        $message = $request->message;
+
+        return view('admin.index', compact('fields', 'message'));
     }
 }

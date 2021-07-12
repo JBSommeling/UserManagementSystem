@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -46,7 +48,25 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        dd('het lukte');
+        // Get all request inputs.
+        $data = $request->only(
+            [
+                'name',
+                'lastname',
+                'email',
+                'password',
+                'question',
+                'answer',
+            ]
+        );
+
+        // Hash the given password
+        $data['password'] = Hash::make($request->password);
+        
+        // Create user
+        User::create($data);
+
+        return redirect()->route('admin.panel', ['message' => trans('messages.user_created')]);
     }
 
     /**
