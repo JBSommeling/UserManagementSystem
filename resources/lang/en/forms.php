@@ -8,6 +8,7 @@
         //Titles
         'reset' => 'Reset Password',
         'edit' => 'Edit Credentials',
+        'create_user' => 'Create User',
 
         // Fields
         'name' => 'Name',

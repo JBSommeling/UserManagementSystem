@@ -24,6 +24,17 @@ class AdminController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('admin.index');
+        // Array with user data and fields.
+        $fields = [
+            'name',
+            'lastname',
+            'email',
+            'password',
+            'password_confirmation',
+            'question',
+            'answer',
+        ];
+        
+        return view('admin.index', compact('fields'));
     }
 }

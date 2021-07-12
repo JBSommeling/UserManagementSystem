@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::resource('users', UserController::class);
 
 // Routes for admin
-Route::get('/admin', AdminController::class)->name('admin.panel');
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/', AdminController::class)->name('panel');
+    Route::resource('/users', AdminUserController::class);
+});
+
 
 // Routes for errors
 Route::get('/403', function () {
