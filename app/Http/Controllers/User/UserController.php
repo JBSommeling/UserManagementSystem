@@ -18,6 +18,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('isSameUser', ['except' => 'index']);
+        $this->middleware('isBlockedUser');
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\EnsureSameUser;
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsBlocked;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => EnsureUserIsAdmin::class,
         'isSameUser' => EnsureSameUser::class,
+        'isBlockedUser' => EnsureUserIsBlocked::class,
     ];
 }
