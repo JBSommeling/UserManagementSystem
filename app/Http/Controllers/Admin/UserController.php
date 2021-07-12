@@ -191,8 +191,32 @@ class UserController extends Controller
         // Search user
         $user = User::findOrFail($id);
 
+        // If user is active, set as unactive and vice versa.
         $user->active ? $user->active = false : $user->active = true;
         $user->save();
+
         return redirect()->route('admin.users.index', ['message' => trans('messages.user_blocked')]);
+    }
+
+    /**
+     * Method to update notes about user by admin
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateNotes(Request $request, $id) {
+        // Search user
+        $user = User::findOrFail($id);
+        
+        // Get request inputs.
+        $data = $request->only(
+             [
+                'notes', 
+             ]
+        );
+        $user->update($data);
+
+        return redirect()->route('admin.users.index', ['message' => trans('messages.user_notes_updated')]);
     }
 }

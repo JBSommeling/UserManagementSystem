@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('answer');
             $table->string('password');
             $table->boolean('active')->default(true);
+            $table->text('notes')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

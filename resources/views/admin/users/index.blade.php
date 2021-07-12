@@ -57,6 +57,12 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <form class="d-inline-block float-right" action="{{ route('admin.users.update.notes', $user->id) }}" method="POST">
+                                            {{ method_field('PATCH') }}
+                                            @csrf
+                                            <textarea class="col-12" name="notes" placeholder="Add notes here."  rows="10">{{ $user->notes }}</textarea>
+                                            <button class="btn btn-primary float-right m-2">{{__('buttons.update_notes')}}</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
