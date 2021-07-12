@@ -8,18 +8,19 @@
                 <div class="card-header">{{ __('forms.edit') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="">
-                        @csrf
-                   
+                    <form method="POST" action="{{ route('users.update', Auth::id()) }}">
+                        @csrf    
+                        {{ method_field('PATCH') }}
+                        
                         @foreach ($fields as $key => $field)
                         <div class="form-group row">
                             <label for="{{ $key }}" class="col-md-4 col-form-label text-md-right">{{ __('forms.'.$key) }}</label>
 
                             <div class="col-md-6">
                                 @if ($key === 'password' || $key === 'password_confirmation')
-                                    <input id="{{ $key }}" type="password" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key) }}{{ $field }}" autocomplete="{{$key}}" autofocus>
+                                    <input id="{{ $key }}" type="password" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key, $field) }}" autocomplete="{{$key}}" autofocus>
                                 @else 
-                                    <input id="{{ $key }}" type="text" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key) }}{{ $field }}" required autocomplete="{{$key}}" autofocus>
+                                    <input id="{{ $key }}" type="text" class="form-control @error($key) is-invalid @enderror" name="{{ $key }}" value="{{ old($key, $field) }}" required autocomplete="{{$key}}" autofocus>
                                 @endif
 
                                 @error($key)

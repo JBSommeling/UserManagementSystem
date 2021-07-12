@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditCredentialsRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -91,9 +92,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditCredentialsRequest $request, $id)
     {
-        //
+        dd('het lukte');
     }
 
     /**
