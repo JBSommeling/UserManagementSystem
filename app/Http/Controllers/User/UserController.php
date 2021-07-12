@@ -97,6 +97,7 @@ class UserController extends Controller
      */
     public function update(EditCredentialsRequest $request, $id)
     {
+        // To find the user.
         $user = User::find($id);
 
         // To evaluate whether the given email is already in use.
