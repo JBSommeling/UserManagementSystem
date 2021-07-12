@@ -62,6 +62,9 @@
                                         <a class="dropdown-item" href="{{ route('admin.panel') }}">
                                             {{ __('navigation.admin_panel') }}
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('admin.users.index') }}">
+                                            {{ __('navigation.user_index') }}
+                                        </a>
                                     @endcan
 
                                     <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">

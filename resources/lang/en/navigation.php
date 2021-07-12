@@ -7,5 +7,6 @@
     return [
         'admin_panel' => "Admin Panel",
         'edit_credentials' => 'Edit Credentials',
+        'user_index' => 'User Index'
     ]
 ?>
