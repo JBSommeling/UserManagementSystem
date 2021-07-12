@@ -13,6 +13,11 @@
                 <div class="card-header">{{ __('navigation.user_index') }}</div>
 
                 <div class="card-body">
+                    <form class="form-inline my-2" method="POST" action="{{ route('admin.users.search') }}">
+                        @csrf
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="filter">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                     <div class="accordion" id="userAccordion">
                         @foreach($users as $user)
                             <div class="card">
@@ -39,7 +44,7 @@
                                                     <td>{{ $user->email }}</td>
                                                 </tr>
                                             </tbody>
-                                          </table>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

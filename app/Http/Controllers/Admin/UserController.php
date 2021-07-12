@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditCredentialsRequest;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -28,7 +29,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = empty(Session::get('users')) ? User::all() : Session::get('users');
         $message = $request->message;
         return view('admin.users.index', compact('users', 'message'));
     }
@@ -163,5 +164,19 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index', ['message' => trans('messages.user_deleted')]);
+    }
+
+    /**
+     * Search the users table by (last)name.
+     *
+     * @param  string  $filter
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+        // Search the user by given filter
+        $users = User::where('name', 'LIKE', '%'.$request->filter.'%')
+                    ->orWhere('lastname', 'LIKE', '%'.$request->filter.'%')->get();
+
+        return redirect()->route('admin.users.index')->with(['users' => $users]);
     }
 }

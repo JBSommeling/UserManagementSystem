@@ -31,7 +31,9 @@ Route::resource('users', UserController::class);
 // Routes for admin
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/', AdminController::class)->name('panel');
-    Route::resource('/users', AdminUserController::class);
+    Route::get('/users/index/', [AdminUserController::class, 'index'])->name('users.index');
+    Route::resource('/users', AdminUserController::class)->except(['index']);
+    Route::post('/users/search', [AdminUserController::class, 'search'])->name('users.search');
 });
 
 
