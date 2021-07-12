@@ -11,5 +11,6 @@
         'user_edited' => 'The user has succesfully been edited.',
         'user_deleted' => 'The user has succesfully been deleted',
         'user_destroy_confirmation' => 'Are you sure you wish to delete this user?',
+        'user_blocked' => 'User has been succesfully (un)blocked',
     ]
 ?>

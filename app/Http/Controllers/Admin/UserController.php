@@ -179,4 +179,13 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with(['users' => $users]);
     }
+
+    public function changeActiveState($id) {
+        // Search user
+        $user = User::findOrFail($id);
+
+        $user->active ? $user->active = false : $user->active = true;
+        $user->save();
+        return redirect()->route('admin.users.index', ['message' => trans('messages.user_blocked')]);
+    }
 }

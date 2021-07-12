@@ -34,6 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/users/index/', [AdminUserController::class, 'index'])->name('users.index');
     Route::resource('/users', AdminUserController::class)->except(['index']);
     Route::post('/users/search', [AdminUserController::class, 'search'])->name('users.search');
+    Route::post('/users/{user}/changeActiveState', [AdminUserController::class, 'changeActiveState'])->name('users.change.active');
 });
 
 
