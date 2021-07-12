@@ -17,7 +17,7 @@ class EnsureSameUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::id() == $request->user) {
+        if (Auth::id() == $request->user && Auth::user()->active == 1) {
             return $next($request);
         }
         return abort(403);
