@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $this->middleware('isAdmin');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +41,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -66,7 +65,7 @@ class UserController extends Controller
 
         // Hash the given password
         $data['password'] = Hash::make($request->password);
-        
+
         // Create user
         User::create($data);
 
@@ -93,8 +92,8 @@ class UserController extends Controller
     public function edit($id)
     {
         // Get user
-        $user = User::findOrFail($id);  
-        
+        $user = User::findOrFail($id);
+
         // Array with user data and fields.
         $fields = [
             'name' => $user->name,
@@ -105,7 +104,7 @@ class UserController extends Controller
             'question' => $user->question,
             'answer' => $user->answer,
         ];
-        
+
         return view('admin.users.edit', compact('fields', 'user'));
     }
 
@@ -130,20 +129,20 @@ class UserController extends Controller
 
         // Get all request inputs.
         $data = $request->only(
-                [
-                    'name',
-                    'lastname',
-                    'email',
-                    'question',
-                    'answer',
-                ]
-            );
+            [
+                'name',
+                'lastname',
+                'email',
+                'question',
+                'answer',
+            ]
+        );
 
         // If the password is blank then use old password.
         if (empty($request->password)) {
             $data['password'] = $user->password;
         }
-        
+
         // Update the given data in the user model.
         $user->update($data);
 
@@ -172,15 +171,23 @@ class UserController extends Controller
      * @param  string  $filter
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         // Search the user by given filter
-        $users = User::where('name', 'LIKE', '%'.$request->filter.'%')
-                    ->orWhere('lastname', 'LIKE', '%'.$request->filter.'%')->get();
+        $users = User::where('name', 'LIKE', '%' . $request->filter . '%')
+            ->orWhere('lastname', 'LIKE', '%' . $request->filter . '%')->get();
 
         return redirect()->route('admin.users.index')->with(['users' => $users]);
     }
 
-    public function changeActiveState($id) {
+    /**
+     * Changes active state of user
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changeActiveState($id)
+    {
         // Search user
         $user = User::findOrFail($id);
 
